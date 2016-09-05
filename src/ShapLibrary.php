@@ -3,8 +3,6 @@
 namespace ShapLibrary;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Request;
 
 /**
  * Class ShapLibrary
