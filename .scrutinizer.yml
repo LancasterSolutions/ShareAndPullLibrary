@@ -1,0 +1,11 @@
+build:
+    environment:
+        php:
+            version: "7.0"
+        variables:
+            SYMFONY_DEPRECATIONS_HELPER: 'weak'
+
+checks:
+    php:
+        code_rating: true
+        duplication: false

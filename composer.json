@@ -1,0 +1,17 @@
+{
+    "name": "lancasters/shap-library",
+    "description": "Library for easy integration of Lancasters SHAP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "César Romero",
+            "email": "romero.latorre@gmail.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {"ShapLibrary\\": "src/"}
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    }
+}
