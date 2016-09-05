@@ -14,7 +14,7 @@ class ShapLibrary
     /**
      * Default SHAP server host
      */
-    const SHAP_SERVER_HOST = 'shareandpull.swarmiz.com';
+    const SHAP_SERVER_HOST = 'http://shareandpull.swarmiz.com/api/data/';
 
     /**
      * Max push into shap
@@ -48,8 +48,6 @@ class ShapLibrary
      * ShapLibrary class. This class allow to use the resources of SHAP. On construct you need to provide the API key.
      * Each list in SHAP has a different key for each partner.
      *
-     * Do not provide protocol nor final slash.
-     *
      * @param      $apiKey
      * @param null $shapServerHost
      */
@@ -80,10 +78,10 @@ class ShapLibrary
     public function detail($toArray = false)
     {
         $method = 'GET';
-        $endpoint = '/detail';
+        $endpoint = 'detail';
         $response = $this->call($method,$endpoint);
 
-        return $this->decodeResponse($response, $toArray);
+        return $this->decodeResponse($response->getBody(), $toArray);
     }
 
     /**
@@ -99,10 +97,10 @@ class ShapLibrary
     public function pull($timestamp, $toArray = false)
     {
         $method = 'GET';
-        $endpoint = '/pull/' . $timestamp;
+        $endpoint = 'pull/' . $timestamp;
         $response = $this->call($method,$endpoint);
 
-        return $this->decodeResponse($response, $toArray);
+        return $this->decodeResponse($response->getBody(), $toArray);
     }
 
     /**
@@ -119,11 +117,11 @@ class ShapLibrary
         $splitInput = $this->splitArray($messages);
 
         $method = 'POST';
-        $endpoint = '/push';
+        $endpoint = 'push';
 
         foreach ($splitInput as $item) {
             $response = $this->call($method,$endpoint,$item);
-            $responseArray = $this->decodeResponse($response, true);
+            $responseArray = $this->decodeResponse($response->getBody(), true);
             if(!empty($responseArray['queued'])) {
                 $amountPushedMessages = $responseArray['queued'];
                 $amountQueued += $amountPushedMessages;
@@ -165,7 +163,7 @@ class ShapLibrary
                 $method,
                 $endpoint,
                 [
-                    'headers'   => $this->getHeaders(),
+                    'headers'   => $this->getHeaders($body),
                     'body'      => json_encode($body)
                 ]
             );
@@ -207,13 +205,16 @@ class ShapLibrary
     /**
      * Return the ApiKey array as a header
      *
+     * @param $body
+     *
      * @return array
      */
-    private function getHeaders()
+    private function getHeaders($body)
     {
         return [
                 'partner-api-key' => $this->apiKey,
                 'Content-Type' => 'application/json',
+                'Content-length' => strlen(json_encode($body)) ?: 0,
                 'Accept' => 'application/json' ,
         ];
     }
