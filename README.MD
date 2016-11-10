@@ -6,12 +6,12 @@ To create a new ShapLibrary and access it's methods:
 $apiKey = 'Your api key for the required list"
 
 $shapLibrary = new ShapLibrary($apiKey);
-$shapLibrary->details();
+$shapLibrary->detail();
 ```
 
 You can call the implemented methods:
 
-# Details
+# Detail
 Return the list of dataTypes for the given list. For example:
 
 [
@@ -24,7 +24,7 @@ Return the list of dataTypes for the given list. For example:
 
 ```php
 //@return array $listElements
-$shapLibrary->details();
+$shapLibrary->detail();
 ```
 
 # pushMessages
