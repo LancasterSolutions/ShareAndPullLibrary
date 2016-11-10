@@ -61,7 +61,7 @@ class ShapLibrary
     /**
      * Return the list of dataTypes that a list has. So for example:
      *
-     * GET /details/
+     * GET /detail/
      *
      * [
      *      "listName" => 'Blacklisted',
@@ -79,7 +79,7 @@ class ShapLibrary
     {
         $method = 'GET';
         $endpoint = 'detail';
-        $response = $this->call($method,$endpoint);
+        $response = $this->call($method, $endpoint);
 
         return $this->decodeResponse($response->getBody(), $toArray);
     }
@@ -98,7 +98,7 @@ class ShapLibrary
     {
         $method = 'GET';
         $endpoint = 'pull/' . $timestamp;
-        $response = $this->call($method,$endpoint);
+        $response = $this->call($method, $endpoint);
 
         return $this->decodeResponse($response->getBody(), $toArray);
     }
@@ -120,9 +120,9 @@ class ShapLibrary
         $endpoint = 'push';
 
         foreach ($splitInput as $item) {
-            $response = $this->call($method,$endpoint,$item);
+            $response = $this->call($method, $endpoint, $item);
             $responseArray = $this->decodeResponse($response->getBody(), true);
-            if(!empty($responseArray['queued'])) {
+            if (!empty($responseArray['queued'])) {
                 $amountPushedMessages = $responseArray['queued'];
                 $amountQueued += $amountPushedMessages;
             }
@@ -158,7 +158,7 @@ class ShapLibrary
      */
     private function call($method, $endpoint, $body = null)
     {
-        try{
+        try {
             $response = $this->curlClient->request(
                 $method,
                 $endpoint,
@@ -169,8 +169,7 @@ class ShapLibrary
             );
 
             return $response;
-        } catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new ShapLibraryException($e);
         }
     }
