@@ -14,7 +14,7 @@ class ShapLibrary
     /**
      * Default SHAP server host
      */
-    const SHAP_SERVER_HOST = 'https://shareandpull.lancaster-solutions.com/api/data/';
+    const SHAP_SERVER_HOST = 'https://shareandpull.swarmiz.com/api/data/';
 
     /**
      * Max push into shap
