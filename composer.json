@@ -12,6 +12,6 @@
       "psr-4": {"ShapLibrary\\": "src/"}
     },
     "require": {
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.3"
     }
 }
